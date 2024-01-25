@@ -28,11 +28,12 @@ int isPalindrome(int x)
     int reverseX = 0;
     while (temp)
     {
-        for (int idx = 0; idx < 9; idx++)
+        reverseX *= 2;
+        for (int idx = 0; idx < 4; idx++)
         {
-            if ((0x7fffffff - reverseX / (idx + 1)) < reverseX)
+            if ((0x7fffffff - reverseX / ((idx + 1) * 2) * 2) < reverseX)
                 return 0;
-            reverseX += reverseX / (idx + 1);
+            reverseX += reverseX / ((idx + 1) * 2) * 2;
         }
         reverseX += temp % 10;
         temp = temp / 10;
