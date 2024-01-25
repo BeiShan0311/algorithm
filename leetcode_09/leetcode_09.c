@@ -37,6 +37,7 @@ int isPalindrome2(int x)
     }
     if (location == 1)
         return 1;
+#if 0
     int reverseX = x % 10;
     temp = x / 10;
     for (int idx = 1; idx < location / 2; idx++)
@@ -45,35 +46,32 @@ int isPalindrome2(int x)
         reverseX += temp % 10;
         temp /= 10;
     }
+    printf("temp:%d\tx:%d\n", temp, x);
     temp = 1;
     for (int idx = 0; idx < (location + 1) / 2; idx++)
     {
         temp *= 10;
     }
     x = x / temp;
-    if (x == reverseX)
-        return 1;
-    return 0;
-
-    // int temp = x / 10;
-    // int reverseX = x % 10;
-    // while (temp)
-    // {
-    //     reverseX *= 2;
-    //     for (int idx = 0; idx < NUM_TEN / 2 - 1; idx++)
-    //     {
-    //         if ((0x7fffffff - reverseX / ((idx + 1) * 2) * 2) < reverseX)
-    //             return 0;
-    //         reverseX += reverseX / ((idx + 1) * 2) * 2;
-    //     }
-    //     reverseX += temp % NUM_TEN;
-    //     temp /= NUM_TEN;
-    // }
-    // if (!(x ^ reverseX))
-    // {
-    //     return 1;
-    // }
-    // return 0;
+    if (x ^ reverseX)
+        return 0;
+#else
+    // 到这里，x可变，用temp代替reverseX，x替换temp,替换上述算法
+    temp = x % 10;
+    x = x / 10;
+    for (int idx = 1; idx < location / 2; idx++)
+    {
+        temp *= 10;
+        temp += x % 10;
+        x /= 10;
+    }
+    printf("temp:%d\tx:%d\t", temp, x);
+    if (location % 2)
+        x /= 10;
+    if (x ^ temp)
+        return 0;
+#endif
+    return 1;
 }
 
 // 方法一
