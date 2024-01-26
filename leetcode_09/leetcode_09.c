@@ -39,6 +39,8 @@ int isPalindrome2(int x)
     int temp = x;
     int location = 0;
     // 计算数字的位数
+
+    
     while (temp)
     {
         temp /= 10;
